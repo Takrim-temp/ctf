@@ -1,0 +1,233 @@
+🔐 CRYPTOGRAPHY CTF CHEAT SHEET
+
+A quick-reference guide to identifying and solving cryptography challenges.
+
+1. Encoding Identification
+
+Technique Appearance / Pattern Tool
+
+Base64 SGVsbG8= CyberChef
+Base32 JBSWY3DP CyberChef
+Hexadecimal 48656c6c6f CyberChef
+Binary 01001000 CyberChef
+URL Encoding %48%65%6C CyberChef
+ASCII 72 101 108 108 111 CyberChef
+ROT13 Uryyb dCode
+Morse Code .... . .-.. .-.. --- dCode
+Base85 87cURD_*#TDfTZ)+T CyberChef
+
+
+2. Classical Ciphers
+
+Cipher Identification Tool
+
+Caesar Alphabet shifted by fixed positions dCode
+ROT13 Alphabet shifted by 13 CyberChef
+Atbash A ↔ Z, B ↔ Y dCode
+Vigenère Keyword-based substitution dCode
+Affine Mathematical letter substitution dCode
+Rail Fence Zigzag transposition dCode
+Columnar Transposition Rearranged columns dCode
+Substitution Letters replaced with other letters dCode
+
+
+3. Hash Identification
+
+Algorithm Output Length
+
+MD5 32 hexadecimal characters
+SHA-1 40 hexadecimal characters
+SHA-224 56 hexadecimal characters
+SHA-256 64 hexadecimal characters
+SHA-384 96 hexadecimal characters
+SHA-512 128 hexadecimal characters
+
+
+Other recognizable formats:
+
+Format Appearance
+
+bcrypt $2a$, $2b$, $2y$
+Argon2 $argon2id$
+PBKDF2 Often identified by structured parameters
+NTLM 32 hexadecimal characters
+
+
+Tools:
+
+Hash Analyzer
+
+Hashcat
+
+John the Ripper
+
+
+Note: Hash length alone cannot reliably identify an algorithm.
+
+4. Modern Cryptography
+
+Algorithm Type What to look for
+
+AES Symmetric encryption Key and IV/nonce
+DES Symmetric encryption 56-bit effective key
+3DES Symmetric encryption Triple DES
+RSA Asymmetric encryption n, e, d, p, q
+ECC Asymmetric encryption Elliptic curve parameters
+Diffie-Hellman Key exchange Public parameters
+ChaCha20 Symmetric encryption Key and nonce
+
+
+5. RSA Cheat Sheet
+
+Remember these variables:
+
+Variable Meaning
+
+p First prime number
+q Second prime number
+n p × q
+e Public exponent
+d Private exponent
+m Plaintext
+c Ciphertext
+φ(n) Euler's totient
+
+
+Important formulas:
+
+n = p × q
+
+φ(n) = (p-1)(q-1)
+
+d = e⁻¹ mod φ(n)
+
+Encryption:
+c = m^e mod n
+
+Decryption:
+m = c^d mod n
+
+Useful tools:
+
+FactorDB
+
+RsaCtfTool
+
+SageMath
+
+
+6. XOR Cheat Sheet
+
+XOR is extremely common in CTFs.
+
+Truth table:
+
+A B A XOR B
+
+0 0 0
+0 1 1
+1 0 1
+1 1 0
+
+
+Important properties:
+
+A XOR 0 = A
+
+A XOR A = 0
+
+A XOR B XOR B = A
+
+Python example:
+
+ciphertext = [29, 0, 21, 21, 24]
+key = 85
+
+plaintext = ''.join(chr(x ^ key) for x in ciphertext)
+
+print(plaintext)
+
+7. Essential CTF Websites
+
+Website Purpose
+
+CyberChef Encoding, decoding, encryption
+dCode Classical cipher solving
+Cryptii Encoding transformations
+FactorDB RSA factorization
+SageMathCell Mathematical cryptanalysis
+RsaCtfTool RSA exploitation
+CryptoHack Learn cryptography through CTF challenges
+OverTheWire Security learning challenges
+
+
+
+---
+
+8. The Ultimate CTF Workflow
+
+Whenever you receive a cryptography challenge, follow this sequence:
+
+Step Action
+
+1 Read the challenge description carefully.
+2 Inspect the ciphertext.
+3 Identify its character set and length.
+4 Check for Base64, Hex, Binary or other encoding.
+5 Try CyberChef Magic.
+6 Check for classical ciphers.
+7 Identify possible hashing algorithms.
+8 Investigate encryption algorithms and key parameters.
+9 Write Python scripts if necessary.
+10 Extract the flag.
+
+
+9. Quick Identification Tricks
+
+Ends with = or == → Could be Base64.
+
+Only 0-9 and A-F → Could be hexadecimal.
+
+Only 0 and 1 → Could be binary.
+
+32 hexadecimal characters → Could be MD5 or NTLM.
+
+40 hexadecimal characters → Could be SHA-1.
+
+64 hexadecimal characters → Could be SHA-256.
+
+Starts with $2b$ → bcrypt.
+
+Starts with $argon2id$ → Argon2.
+
+Contains n, e, c → Could be RSA parameters.
+
+Repeating XOR patterns → Could indicate repeating-key XOR.
+
+
+Remember: These are clues, not proof. A good CTF solver tests hypotheses rather than assuming an algorithm from appearance.
+
+My recommendation
+
+If you have only a few hours before your CTF, prioritize learning:
+
+1. Base64, Hex and Binary.
+
+
+2. ROT13, Caesar and Atbash.
+
+
+3. XOR.
+
+
+4. MD5 and SHA hashes.
+
+
+5. RSA basics.
+
+
+6. CyberChef.
+
+
+
+Practice here: [CryptoHack – Free Cryptography Challenges](https://cryptohack.org/?utm_source=chatgpt.com)
